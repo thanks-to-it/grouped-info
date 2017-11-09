@@ -1,0 +1,41 @@
+{% if posts %}
+    <ul>
+        {% set phone1 = posts | filter('phone-1') %}
+
+        {#
+        <li>{{ posts }}</li>
+
+        {% if post.slug=='phone-1' in posts|keys %}
+            <li>{{ post.title }} - {{ posts }}</li>
+        {% endif %}
+        #}
+
+        {#
+        {% for post in posts if post.slug=='phone-1' %}
+            <li>{{ post.title }} - {{ post.slug }}</li>
+        {% endfor %}
+
+        {% for post in posts if post.slug=='phone-2' %}
+            <li>{{ post.title }} - {{ post.slug }}</li>
+        {% endfor %}
+        #}
+
+        {#{{function('wp_log',['asda'])}} #}
+
+
+        <li><strong>Phone1:</strong> {{ phone1 }}</li>
+        <li><strong>Phone2:</strong> {{ posts | filter('phone-2') }}</li>
+
+
+        {# <h1>{{ wp_list_filter( posts,['slug','phone-1']).title }}</h1> #}
+
+
+        {#
+        {% for post in posts %}
+            <li>{{ post.title }} - {{ post.slug }}</li>
+        {% endfor %}
+        #}
+
+
+    </ul>
+{% endif %}
