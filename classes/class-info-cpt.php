@@ -50,7 +50,7 @@ if ( ! class_exists( 'TxToIT_Grouped_Info\Info_CPT' ) ) {
 				'has_archive'        => true,
 				'hierarchical'       => false,
 				'menu_position'      => null,
-				'supports'           => array( 'title', 'editor' )
+				'supports'           => array( 'title', 'editor', 'page-attributes' )
 				//'supports'           => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments' )
 			);
 			register_post_type( self::$post_type, $args );

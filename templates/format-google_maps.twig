@@ -1,4 +1,9 @@
 {% if posts %}
     {% set full_address = posts | pluck('post_content') | ignore_empty | join(',') %}
-    <img src="https://maps.googleapis.com/maps/api/staticmap?center={{ full_address | url_encode }}&zoom=15&scale=1&size=600x300&maptype=roadmap&format=png&visual_refresh=true&markers=size:mid%7Ccolor:0xff0000%7Clabel:%7C{{ full_address | url_encode }}"/>
+    {% set zoom = 15 %}
+    {% set scale = 1 %}
+    {% set width = 600 %}
+    {% set height = 300 %}
+    {% set maptype = roadmap %}
+    <img class="txit-group txit-google_maps" src="https://maps.googleapis.com/maps/api/staticmap?center={{ full_address | url_encode }}&zoom={{ zoom }}&scale={{ scale }}&size={{ width }}x{{ height }}&maptype={{ maptype }}&format=png&visual_refresh=true&markers=size:mid%7Ccolor:0xff0000%7Clabel:%7C{{ full_address | url_encode }}"/>
 {% endif %}

@@ -1,0 +1,8 @@
+{% if posts %}
+    {% set phone1 = posts | filter('phone-1') %}
+    {% set phone2 = posts | filter('phone-2') %}
+    <ul>
+        <li><strong>Phone1:</strong> {{ phone1 }}</li>
+        <li><strong>Phone2:</strong> {{ phone2 }}</li>
+    </ul>
+{% endif %}

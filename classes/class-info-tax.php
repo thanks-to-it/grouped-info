@@ -46,6 +46,27 @@ if ( ! class_exists( 'TxToIT_Grouped_Info\Info_Tax' ) ) {
 			register_taxonomy( self::$taxonomy, array( Info_CPT::$post_type ), $args );
 		}
 
+		public static function add_dropdown_on_admin() {
+			global $typenow;
+			global $wp_query;
+			if ( $typenow == Info_CPT::$post_type ) {
+				$taxonomy          = Info_Tax::$taxonomy;
+				$business_taxonomy = get_taxonomy( $taxonomy );
+				wp_dropdown_categories( array(
+					'show_option_all' => sprintf( __( "Show All %s", 'txtoit-grouped-info' ), $business_taxonomy->label ),
+					'taxonomy'        => $taxonomy,
+					'name'            => Info_Tax::$taxonomy,
+					'value_field'     => 'slug',
+					'orderby'         => 'name',
+					'selected'        => get_query_var( Info_Tax::$taxonomy ),
+					'hierarchical'    => true,
+					'depth'           => 3,
+					'show_count'      => true,  // This will give a view
+					'hide_empty'      => false,   // This will give false positives, i.e. one's not empty related to the other terms. TODO: Fix that
+				) );
+			}
+		}
+
 		public static function create_default_terms() {
 			self::register_taxonomy();
 			//error_log('create_default_terms');

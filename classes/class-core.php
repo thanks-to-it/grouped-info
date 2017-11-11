@@ -29,19 +29,30 @@ if ( ! class_exists( 'TxToIT_Grouped_Info\Core' ) ) {
 			add_action( 'timber/twig/filters', array( 'TxToIT_Grouped_Info\Timber', 'add_timber_filters' ) );
 		}
 
-		private function handle_contact_info() {
+		private function handle_contact_info_cpt() {
 			// Create CPT
 			add_action( 'init', array( 'TxToIT_Grouped_Info\Info_CPT', 'register_post_type' ) );
 
+			// Create default posts
+			register_activation_hook( Core::get_instance()->file_path, array( 'TxToIT_Grouped_Info\Info_CPT', 'create_default_info' ) );
+		}
+
+		private function handle_contact_info_tax() {
 			// Create Taxonomy
 			add_action( 'init', array( 'TxToIT_Grouped_Info\Info_Tax', 'register_taxonomy' ) );
 
 			// Create default Taxonomy terms
 			register_activation_hook( Core::get_instance()->file_path, array( 'TxToIT_Grouped_Info\Info_Tax', 'create_default_terms' ) );
 
-			// Create default posts
-			register_activation_hook( Core::get_instance()->file_path, array( 'TxToIT_Grouped_Info\Info_CPT', 'create_default_info' ) );
+			// Info tax admin filter
+			add_action( 'restrict_manage_posts', array( 'TxToIT_Grouped_Info\Info_Tax', 'add_dropdown_on_admin' ) );
+		}
 
+		private function handle_contact_info() {
+			$this->handle_contact_info_cpt();
+			$this->handle_contact_info_tax();
+
+			// Create shortcode
 			add_shortcode( 'txit_info', array( 'TxToIT_Grouped_Info\Info_Shortcode', 'get_info_shortcode' ) );
 		}
 

@@ -64,6 +64,8 @@ if ( ! class_exists( 'TxToIT_Grouped_Info\Info_Shortcode' ) ) {
 			}
 
 			$args['post_type'] = Info_CPT::$post_type;
+			$args['order']     = 'asc';
+			$args['orderby']   = 'menu_order title';
 			$format_id         = self::get_format_id( $original_atts, $args );
 
 			// Create tax query param
@@ -77,9 +79,9 @@ if ( ! class_exists( 'TxToIT_Grouped_Info\Info_Shortcode' ) ) {
 
 			if ( $format['template_from'] == 'twig_file' || empty( $format['template_from'] ) ) {
 				$source = ! empty( $format['source'] ) ? $format['source'] : "format-{$format['id']}.twig";
-				//$source = ! empty( $format['source'] ) ? $format['source'] : "format-{$format}.twig";
 				\TxToIT_Grouped_Info\Timber::setup_timber();
 				$context['posts'] = \Timber::get_posts( $args );
+				$context          = apply_filters( 'txit_timber_context', $context, $format );
 				$source           = \Timber\Timber::compile( $source, $context );
 				return $source;
 			}

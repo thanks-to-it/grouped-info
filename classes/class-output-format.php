@@ -34,6 +34,11 @@ if ( ! class_exists( 'TxToIT_Grouped_Info\Output_Format' ) ) {
 					'label'         => 'Full Address',
 					'template_from' => 'twig_file',
 				),
+				array(
+					'id'            => 'list_font_awesome',
+					'label'         => 'List - Font Awesome Icons',
+					'template_from' => 'twig_file',
+				),
 			);
 
 			return self::$formats = apply_filters( 'txit_formats', $formats );
