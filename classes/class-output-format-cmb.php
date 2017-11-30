@@ -7,13 +7,13 @@
  * @author  Pablo S G Pacheco
  */
 
-namespace TxToIT_Grouped_Info;
+namespace TxToIT\Grouped_Info;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } // Exit if accessed directly
 
-if ( ! class_exists( 'TxToIT_Grouped_Info\Output_Format_CMB' ) ) {
+if ( ! class_exists( 'TxToIT\Grouped_Info\Output_Format_CMB' ) ) {
 
 	class Output_Format_CMB {
 		public static $cmb_id = 'wpci_format';
@@ -23,7 +23,6 @@ if ( ! class_exists( 'TxToIT_Grouped_Info\Output_Format_CMB' ) ) {
 			$formats = Output_Format::get_formats();
 			$cmb_term = new_cmb2_box( array(
 				'id' => self::$cmb_id,
-
 				'title'        => esc_html__( 'Format', 'txtoit-grouped-info' ), // Doesn't output for term boxes
 				'object_types' => array( 'term' ), // Tells CMB2 to use term_meta vs post_meta
 				'taxonomies'   => array( Info_Tax::$taxonomy ), // Tells CMB2 which taxonomies should have these fields
@@ -36,11 +35,6 @@ if ( ! class_exists( 'TxToIT_Grouped_Info\Output_Format_CMB' ) ) {
 				'id'       => self::$cmb_option_format,
 				'type'     => 'select',
 				'options'  => wp_list_pluck( $formats, 'label', 'id' ),
-				/*'options' => array(
-					'standard' => __( 'Option One', 'cmb2' ),
-					'custom'   => __( 'Option Two', 'cmb2' ),
-					'none'     => __( 'Option Three', 'cmb2' ),
-				),*/
 				'on_front' => false,
 			) );
 		}

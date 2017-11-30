@@ -7,13 +7,13 @@
  * @author  Pablo S G Pacheco
  */
 
-namespace TxToIT_Grouped_Info;
+namespace TxToIT\Grouped_Info;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } // Exit if accessed directly
 
-if ( ! class_exists( 'TxToIT_Grouped_Info\Info_Tax' ) ) {
+if ( ! class_exists( 'TxToIT\Grouped_Info\Info_Tax' ) ) {
 
 	class Info_Tax {
 		public static $taxonomy = 'txtoit_group';

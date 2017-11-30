@@ -7,13 +7,13 @@
  * @author  Pablo S G Pacheco
  */
 
-namespace TxToIT_Grouped_Info;
+namespace TxToIT\Grouped_Info;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } // Exit if accessed directly
 
-if ( ! class_exists( 'TxToIT_Grouped_Info\Info_Shortcode' ) ) {
+if ( ! class_exists( 'TxToIT\Grouped_Info\Info_Shortcode' ) ) {
 
 	class Info_Shortcode {
 
@@ -78,10 +78,12 @@ if ( ! class_exists( 'TxToIT_Grouped_Info\Info_Shortcode' ) ) {
 			}
 
 			if ( $format['template_from'] == 'twig_file' || empty( $format['template_from'] ) ) {
-				$source = ! empty( $format['source'] ) ? $format['source'] : "format-{$format['id']}.twig";
-				\TxToIT_Grouped_Info\Timber::setup_timber();
+				$format_id = $format['id'];
+				$source    = ! empty( $format['source'] ) ? $format['source'] : "format-{$format_id}.twig";
+				\TxToIT\Grouped_Info\Timber::setup_timber();
 				$context['posts'] = \Timber::get_posts( $args );
-				$context          = apply_filters( 'txit_timber_context', $context, $format );
+				$context          = apply_filters( 'txit_timber_context', $context, $format, $args );
+				$context          = apply_filters( "txit_timber_context_{$format_id}", $context, $format, $args );
 				$source           = \Timber\Timber::compile( $source, $context );
 				return $source;
 			}

@@ -7,22 +7,22 @@
  * @author  Pablo S G Pacheco
  */
 
-namespace TxToIT_Grouped_Info;
+namespace TxToIT\Grouped_Info;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } // Exit if accessed directly
 
-if ( ! class_exists( 'TxToIT_Grouped_Info\Output_Format' ) ) {
+if ( ! class_exists( 'TxToIT\Grouped_Info\Output_Format' ) ) {
 	class Output_Format {
 		public static $formats = array();
 
 		public static function get_formats() {
-			$formats = array(
+			$formats       = array(
 				array(
 					'id'            => 'list',
 					'label'         => 'List',
-					'template_from' => 'twig_file', // twig_file || string
+					'template_from' => 'twig_file',
 				),
 				array(
 					'id'            => 'google_maps',
@@ -35,13 +35,29 @@ if ( ! class_exists( 'TxToIT_Grouped_Info\Output_Format' ) ) {
 					'template_from' => 'twig_file',
 				),
 				array(
-					'id'            => 'list_font_awesome',
-					'label'         => 'List - Font Awesome Icons',
+					'id'            => 'list_fa',
+					'label'         => 'List - Font Awesome',
+					'template_from' => 'twig_file',
+				),
+				array(
+					'id'            => 'comma',
+					'label'         => 'Comma Separated',
+					'template_from' => 'twig_file',
+				),
+				array(
+					'id'            => 'info',
+					'label'         => 'Simple info',
 					'template_from' => 'twig_file',
 				),
 			);
+			self::$formats = apply_filters( 'txit_formats', $formats );
 
-			return self::$formats = apply_filters( 'txit_formats', $formats );
+			// Sort formats
+			usort( self::$formats, function ( $a, $b ) {
+				return strcmp( $a["label"], $b["label"] );
+			} );
+
+			return self::$formats;
 		}
 
 		public static function get_format_by_id( $format_id ) {

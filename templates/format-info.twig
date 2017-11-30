@@ -1,0 +1,7 @@
+{% if posts %}
+    {% for post in posts %}
+        {% if post.post_content %}
+            <span class="txit-info">{{ post.post_content }}</span>
+        {% endif %}
+    {% endfor %}
+{% endif %}

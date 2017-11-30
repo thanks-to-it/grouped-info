@@ -7,10 +7,10 @@
  * @author  Pablo S G Pacheco
  */
 
-namespace TxToIT_Grouped_Info;
+namespace TxToIT\Grouped_Info;
 
 
-if ( ! class_exists( 'TxToIT_Grouped_Info\WP_Plugin' ) ) {
+if ( ! class_exists( 'TxToIT\Grouped_Info\WP_Plugin' ) ) {
 
 	class WP_Plugin{
 
